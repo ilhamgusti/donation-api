@@ -39,7 +39,8 @@ class DonasiController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Donasi::firstOrFail('id', $id);
+        return new DonasiResource($data);
     }
 
     /**

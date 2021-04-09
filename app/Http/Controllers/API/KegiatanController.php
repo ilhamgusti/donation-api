@@ -39,7 +39,8 @@ class KegiatanController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Kegiatan::firstOrFail('id',$id);
+        return new KegiatanResource($data);
     }
 
     /**
