@@ -20,12 +20,15 @@ class AuthController extends Controller
 
         $user = User::where('email', $request['email'])->firstOrFail();
 
+        $tokenList = $user->tokens;
+        $user->tokens()->delete();
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'data'=> $user
+            'data'=> $user,
+            'tokenList'=>$tokenList
         ]);
     }
 
@@ -62,9 +65,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // $request->user()->currentAccessToken()->delete();
-        // $request->user()->token();
-        // dd($request->user()->tokens());
-        return $request->bearerToken();
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['success'=>true, 'message'=>'Success Logout']);
     }
 }
