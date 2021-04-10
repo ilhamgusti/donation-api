@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Filter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Donasi extends Model
 {
-    use HasFactory;
+    use HasFactory, Filter;
     protected $table = 'donasi';
 
     protected $fillable = [
@@ -18,6 +19,13 @@ class Donasi extends Model
         'tanggal_kirim',
         'kirim_lewat',
     ];
+
+    protected function getFilters()
+    {
+        return [
+            'App\QueryFilters\ByDate:tanggal_kirim,startDate,endDate',
+        ];
+    }
     //setiap donasi dimiliki 1 user
     public function user()
     {

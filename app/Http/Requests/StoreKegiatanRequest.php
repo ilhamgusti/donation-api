@@ -24,15 +24,11 @@ class StoreKegiatanRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_panti'=>'required|string',
-            'alamat'=>'required|string',
-            'noTel_panti'=>'required',
-            'emailPanti'=>'required|email|string',
-            'jumlah_anak'=>'required|integer',
-            'jumlah_pengurus'=>'required|integer',
-            'kebutuhan_panti'=>'required|string',
-            'sertifikat'=>'required|file|mimes:png,jpg,jpeg',
-            'ktp'=>'required|file|mimes:png,jpg,jpeg',
+            'hari_acara'=>'required|string',
+            'sesi_acara'=>'required|string',
+            'acara'=>'required',
+            'sesi_makan'=>'required|string',
+            'pending'=>'required|integer',
         ];
     }
 }

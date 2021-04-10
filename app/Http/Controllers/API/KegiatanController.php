@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKegiatanRequest;
+use App\Http\Requests\UpdateKegiatanRequest;
 use App\Http\Resources\KegiatanResource;
 use App\Http\Transformers\KegiatanTransformer;
 use App\Models\Kegiatan;
@@ -21,7 +22,7 @@ class KegiatanController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Kegiatan::paginate($request->has('pageSize') ? $request->pageSize:10);
+        $data = Kegiatan::filter()->paginate($request->has('pageSize') ? $request->pageSize : 10);
         return KegiatanResource::collection($data);
     }
 
@@ -44,12 +45,12 @@ class KegiatanController extends Controller
             return response()->json($ex->getMessage(), 409);
         }
         return (new KegiatanResource($kegiatan))
-        ->additional([
-            'meta' => [
-                'success' => true,
-                'message' => "Kegiatan saved"
-  ]
-        ]);
+            ->additional([
+                'meta' => [
+                    'success' => true,
+                    'message' => "Kegiatan saved"
+                ]
+            ]);
     }
 
     /**
@@ -71,9 +72,25 @@ class KegiatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateKegiatanRequest $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $kegiatan = KegiatanTransformer::toInstance($request->validated(),Kegiatan::findOrFail($id));
+            $kegiatan->save();
+            DB::commit();
+        } catch (Exception $ex) {
+            Log::info($ex->getMessage());
+            DB::rollBack();
+            return response()->json($ex->getMessage(), 409);
+        }
+        return (new KegiatanResource($kegiatan))
+            ->additional([
+                'meta' => [
+                    'success' => true,
+                    'message' => "Kegiatan updated"
+                ]
+            ]);
     }
 
     /**

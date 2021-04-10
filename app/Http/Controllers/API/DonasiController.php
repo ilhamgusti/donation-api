@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreDonasiRequest;
 use App\Http\Resources\DonasiResource;
+use App\Http\Transformers\DonasiTransformer;
 use App\Models\Donasi;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class DonasiController extends Controller
 {
@@ -16,7 +21,7 @@ class DonasiController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Donasi::paginate($request->has('pageSize') ? $request->pageSize:10);
+        $data = Donasi::filter()->paginate($request->has('pageSize') ? $request->pageSize:10);
         return DonasiResource::collection($data);
     }
 
@@ -26,10 +31,25 @@ class DonasiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDonasiRequest $request)
     {
-        $data = new Donasi($request->all());
-        return $request->user()->donasi()->save($data);
+        DB::beginTransaction();
+        try {
+            $donasi = DonasiTransformer::toInstance($request->validated());
+            $request->user()->donasi()->save($donasi);
+            DB::commit();
+        } catch (Exception $ex) {
+            Log::info($ex->getMessage());
+            DB::rollBack();
+            return response()->json($ex->getMessage(), 409);
+        }
+        return (new DonasiResource($donasi))
+            ->additional([
+                'meta' => [
+                    'success' => true,
+                    'message' => "Kegiatan saved"
+                ]
+            ]);
     }
 
     /**
