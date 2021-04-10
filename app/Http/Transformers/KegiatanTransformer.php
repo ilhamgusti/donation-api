@@ -15,32 +15,20 @@ class KegiatanTransformer
 
         foreach ($input as $key => $value) {
             switch ($key) {
-                case'nama_Kegiatan':
-                    $kegiatan->nama_kegiatan = $value;
+                case "hari_acara":
+                    $kegiatan["hari_acara"] = $value;
                     break;
-                case'alamat':
-                    $kegiatan->alamat = $value;
+                case "sesi_acara":
+                    $kegiatan["sesi_acara"] = $value;
                     break;
-                case'noTel_kegiatan':
-                    $kegiatan->noTel_kegiatan = $value;
+                case "acara":
+                    $kegiatan["acara"] = $value;
                     break;
-                case'emailkegiatan':
-                    $kegiatan->emailkegiatan = $value;
+                case "sesi_makan":
+                    $kegiatan["sesi_makan"] = $value;
                     break;
-                case'jumlah_anak':
-                    $kegiatan->jumlah_anak = $value;
-                    break;
-                case'jumlah_pengurus':
-                    $kegiatan->jumlah_pengurus = $value;
-                    break;
-                case'kebutuhan_kegiatan':
-                    $kegiatan->kebutuhan_kegiatan = $value;
-                    break;
-                case'sertifikat':
-                    $kegiatan->sertifikat = $value;
-                    break;
-                case'ktp':
-                    $kegiatan->ktp = $value;
+                case "pending":
+                    $kegiatan["pending"] = $value;
                     break;
             }
         }
