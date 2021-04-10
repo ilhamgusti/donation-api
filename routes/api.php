@@ -34,6 +34,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::match(['PUT','PATCH'],'panti',[PantiController::class,'update'])->name('panti.update');
     Route::apiResource('donasi', DonasiController::class,['except'=>'update']);
     Route::match(['PUT','PATCH'],'donasi',[DonasiController::class,'update'])->name('donasi.update');
-    Route::apiResource('kegiatan', KegiatanController::class,['except'=>'update']);
-    Route::match(['PUT','PATCH'],'kegiatan',[KegiatanController::class,'update'])->name('kegiatan.update');
+    Route::apiResource('kegiatan', KegiatanController::class);
 });
