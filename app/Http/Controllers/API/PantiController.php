@@ -26,7 +26,12 @@ class PantiController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Panti::paginate($request->has('pageSize') ? $request->pageSize : 10);
+        if($request->has('pageSize')){
+           $data = Panti::paginate($request->has('pageSize'));
+        }else{
+            $data = Panti::all();
+        }
+
         return PantiResource::collection($data);
     }
 
