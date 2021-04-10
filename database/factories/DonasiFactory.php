@@ -31,7 +31,7 @@ class DonasiFactory extends Factory
             'kirim_lewat'=>$this->faker->name,
             'jumlah_barang'=>rand(3,50),
             'pending' => true,
-            'user_id'=> User::where('tipe',1)->get()->random(),
+            'user_id'=> User::factory(),
 
         ];
     }

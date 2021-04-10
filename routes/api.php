@@ -23,14 +23,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
+Route::post('/register', [AuthController::class, 'register'])->name('user.register');
+Route::post('/login', [AuthController::class, 'login'])->name('user.login');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->name('user.logout');
+Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum')->name('user.me');
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::apiResource('panti', PantiController::class);
-    Route::apiResource('donasi', DonasiController::class);
-    Route::apiResource('kegiatan', KegiatanController::class);
+    Route::apiResource('panti', PantiController::class,['except'=>'update']);
+    Route::match(['PUT','PATCH'],'panti',[PantiController::class,'update'])->name('panti.update');
+    Route::apiResource('donasi', DonasiController::class,['except'=>'update']);
+    Route::match(['PUT','PATCH'],'donasi',[DonasiController::class,'update'])->name('donasi.update');
+    Route::apiResource('kegiatan', KegiatanController::class,['except'=>'update']);
+    Route::match(['PUT','PATCH'],'kegiatan',[KegiatanController::class,'update'])->name('kegiatan.update');
 });

@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreKegiatanRequest;
 use App\Http\Resources\KegiatanResource;
+use App\Http\Transformers\KegiatanTransformer;
 use App\Models\Kegiatan;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class KegiatanController extends Controller
 {
@@ -14,9 +19,9 @@ class KegiatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Kegiatan::paginate(10);
+        $data = Kegiatan::paginate($request->has('pageSize') ? $request->pageSize:10);
         return KegiatanResource::collection($data);
     }
 
@@ -26,9 +31,25 @@ class KegiatanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreKegiatanRequest $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $kegiatan = KegiatanTransformer::toInstance($request->validated());
+            $request->user()->kegiatan()->save($kegiatan);
+            DB::commit();
+        } catch (Exception $ex) {
+            Log::info($ex->getMessage());
+            DB::rollBack();
+            return response()->json($ex->getMessage(), 409);
+        }
+        return (new KegiatanResource($kegiatan))
+        ->additional([
+            'meta' => [
+                'success' => true,
+                'message' => "Kegiatan saved"
+  ]
+        ]);
     }
 
     /**
@@ -39,8 +60,8 @@ class KegiatanController extends Controller
      */
     public function show($id)
     {
-        $data = Kegiatan::firstOrFail('id',$id);
-        return new KegiatanResource($data);
+        $data = Kegiatan::findOrFail($id);
+        return new KegiatanResource($data->loadMissing('panti'));
     }
 
     /**
@@ -63,6 +84,10 @@ class KegiatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Kegiatan::findOrFail($id);
+        $data->delete();
+        return response()->json([
+            'message' => 'Delete Data Successfully'
+        ]);
     }
 }

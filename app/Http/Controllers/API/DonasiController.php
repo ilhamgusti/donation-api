@@ -14,9 +14,9 @@ class DonasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Donasi::paginate(10);
+        $data = Donasi::paginate($request->has('pageSize') ? $request->pageSize:10);
         return DonasiResource::collection($data);
     }
 
@@ -28,7 +28,8 @@ class DonasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Donasi($request->all());
+        return $request->user()->donasi()->save($data);
     }
 
     /**
@@ -39,8 +40,8 @@ class DonasiController extends Controller
      */
     public function show($id)
     {
-        $data = Donasi::firstOrFail('id', $id);
-        return new DonasiResource($data);
+        $data = Donasi::findOrFail($id);
+        return new DonasiResource($data->loadMissing('user'));
     }
 
     /**

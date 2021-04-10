@@ -34,6 +34,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'email_verified_at',
+        'api_token'
     ];
 
     /**
@@ -48,12 +50,12 @@ class User extends Authenticatable
     // 1 user bisa memiliki banyak donasi namun hanya yang bertipe donatur atau tipe = 0
     public function donasi()
     {
-        return $this->hasMany(Donasi::class, 'id', 'user_id');
+        return $this->hasMany(Donasi::class, 'user_id');
     }
 
     // 1 panti dimiliki 1 user account dengan tipe 1
     public function panti()
     {
-        return $this->belongsTo(Panti::class, 'panti_id', 'id');
+        return $this->hasOne(Panti::class, 'user_id');
     }
 }
