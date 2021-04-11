@@ -40,15 +40,14 @@ class AuthController extends Controller
             'tipe' => 'required|string',
             'alamat'=> 'required',
             'no_tel' => 'required',
-            'username' => 'required|alpha_num|min:3|max:255|unique:users,username'
+            'nama' => 'required|string|min:3|max:255'
         ]);
 
         $user = User::create([
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
-            'online' => 0,
             'alamat'=> $validatedData['alamat'],
-            'username'=> $validatedData['username'],
+            'nama'=> $validatedData['nama'],
             'tipe' => $validatedData['tipe'],
             'no_tel'=> $validatedData['no_tel']
         ]);
