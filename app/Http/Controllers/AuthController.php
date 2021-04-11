@@ -40,6 +40,7 @@ class AuthController extends Controller
             'tipe' => 'required|string',
             'alamat'=> 'required',
             'no_tel' => 'required',
+            'username' => 'required|alpha_num|min:3|max:255|unique:users,username'
         ]);
 
         $user = User::create([
@@ -47,6 +48,7 @@ class AuthController extends Controller
             'password' => Hash::make($validatedData['password']),
             'online' => 0,
             'alamat'=> $validatedData['alamat'],
+            'username'=> $validatedData['username'],
             'tipe' => $validatedData['tipe'],
             'no_tel'=> $validatedData['no_tel']
         ]);
