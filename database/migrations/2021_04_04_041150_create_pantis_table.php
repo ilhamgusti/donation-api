@@ -23,6 +23,8 @@ class CreatePantisTable extends Migration
             $table->integer('jumlah_pengurus');
             $table->longText('kebutuhan_panti');
             $table->string('sertifikat');
+            $table->boolean('isVerified_ktp')->default(false);
+            $table->boolean('isVerified_sertifikat')->default(false);
             $table->string('ktp');
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
