@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\ApprovalController;
+use App\Http\Controllers\API\ChangeUserController;
 use App\Http\Controllers\API\PantiController;
 use App\Http\Controllers\API\KegiatanController;
 use App\Http\Controllers\API\DonasiController;
@@ -35,4 +37,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('donasi', DonasiController::class,['except'=>'update']);
     Route::match(['PUT','PATCH'],'donasi',[DonasiController::class,'update'])->name('donasi.update');
     Route::apiResource('kegiatan', KegiatanController::class);
+    Route::get('approval',[ApprovalController::class,'index'])->name('approval.index');
+    Route::match(['PUT','PATCH'],'approval',[ApprovalController::class,'update'])->name('approval.update');
+
+    Route::match(['PUT','PATCH'],'me',[ChangeUserController::class])->name('user.update');
 });
