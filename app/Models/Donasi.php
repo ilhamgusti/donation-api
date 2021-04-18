@@ -32,4 +32,9 @@ class Donasi extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function panti()
+    {
+        return $this->belongsTo(Panti::class, 'panti_id', 'id');
+    }
 }

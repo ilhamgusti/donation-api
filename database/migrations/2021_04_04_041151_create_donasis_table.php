@@ -26,6 +26,9 @@ class CreateDonasisTable extends Migration
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->unsignedBigInteger('panti_id');
+            $table->foreign('panti_id')->references('id')->on('panti');
         });
     }
 

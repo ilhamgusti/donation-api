@@ -32,4 +32,8 @@ class Panti extends Model
     public function kegiatan(){
         return $this->hasMany(Kegiatan::class, 'id');
     }
+    //1 panti mempunyai banyak kegiatan
+    public function donasi(){
+        return $this->hasMany(Donasi::class, 'id');
+    }
 }
