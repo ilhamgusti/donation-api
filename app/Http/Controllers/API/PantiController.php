@@ -26,9 +26,9 @@ class PantiController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('pageSize')){
-           $data = Panti::paginate($request->has('pageSize'));
-        }else{
+        if ($request->has('pageSize')) {
+            $data = Panti::paginate($request->has('pageSize'));
+        } else {
             $data = Panti::all();
         }
 
@@ -45,15 +45,20 @@ class PantiController extends Controller
     {
 
         // $validator->validate();
-        if ($request->user()->tipe === 0 || $request->user()->tipe === 'donatur') {
+        if ($request->user()->tipe === 0 || $request->user()->tipe === 'Donatur') {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk membuat panti'
             ], 403);
         }
+        if ($request->user()->panti()->first()) {
+            return response()->json([
+                'message' => 'kamu tidak dapat membuat lebih dari satu panti'
+            ], 403);
+        };
         $panti = new Panti($request->all());
 
-        $panti->ktp = URL::asset('storage/'.$request->ktp->store('images','public'));
-        $panti->sertifikat = URL::asset('storage/'.$request->sertifikat->store('images','public'));
+        $panti->ktp = URL::asset('storage/' . $request->ktp->store('images', 'public'));
+        $panti->sertifikat = URL::asset('storage/' . $request->sertifikat->store('images', 'public'));
         return $request->user()->panti()->save($panti);
         // $request->user()->panti()->create($request->all());
         // return $panti;
@@ -80,7 +85,7 @@ class PantiController extends Controller
      */
     public function update(UpdatePantiRequest $request)
     {
-        if ($request->user()->tipe === 0 || $request->user()->tipe === 'donatur') {
+        if ($request->user()->tipe === 0 || $request->user()->tipe === 'Donatur') {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk mengubah panti'
             ], 403);
@@ -98,12 +103,12 @@ class PantiController extends Controller
         }
 
         return (new PantiResource($panti))
-        ->additional([
-            'meta' => [
-                'success' => true,
-                'message' => "Panti updated"
-  ]
-        ]);
+            ->additional([
+                'meta' => [
+                    'success' => true,
+                    'message' => "Panti updated"
+                ]
+            ]);
     }
 
     /**
@@ -114,7 +119,7 @@ class PantiController extends Controller
      */
     public function destroy(Request $request)
     {
-        if ($request->user()->tipe === 0 || $request->user()->tipe === 'donatur') {
+        if ($request->user()->tipe === 0 || $request->user()->tipe === 'Donatur') {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk menghapus panti'
             ], 403);
