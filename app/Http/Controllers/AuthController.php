@@ -18,7 +18,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = User::where('email', $request['email'])->firstOrFail();
+        $user = User::with('panti')->where('email', $request['email'])->firstOrFail();
 
         $tokenList = $user->tokens;
         $user->tokens()->delete();
@@ -28,7 +28,6 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'Bearer',
             'data'=> $user,
-            'tokenList'=>$tokenList
         ]);
     }
 
