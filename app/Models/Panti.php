@@ -19,6 +19,8 @@ class Panti extends Model
         'jumlah_pengurus',
         'kebutuhan_panti',
         'sertifikat',
+        'isVerified_ktp',
+        'isVerified_sertifikat',
         'ktp'
     ];
 
