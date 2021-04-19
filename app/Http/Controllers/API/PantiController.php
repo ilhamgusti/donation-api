@@ -59,7 +59,8 @@ class PantiController extends Controller
 
         $panti->ktp = URL::asset('storage/' . $request->ktp->store('images', 'public'));
         $panti->sertifikat = URL::asset('storage/' . $request->sertifikat->store('images', 'public'));
-        return $request->user()->panti()->save($panti);
+        $request->user()->panti()->save($panti);
+        return new PantiResource($request->user()->panti);
         // $request->user()->panti()->create($request->all());
         // return $panti;
     }
