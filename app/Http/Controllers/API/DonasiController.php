@@ -58,9 +58,13 @@ class DonasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        $data = Donasi::findOrFail($id);
+        if($id === 'details') {
+            $data = Donasi::findOrFail($request->$id);
+        }else{
+            $data = Donasi::findOrFail($id);
+        }
         return new DonasiResource($data->loadMissing('user'));
     }
 
