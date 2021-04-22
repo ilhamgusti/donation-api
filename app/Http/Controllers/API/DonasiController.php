@@ -65,7 +65,7 @@ class DonasiController extends Controller
         }else{
             $data = Donasi::findOrFail($id);
         }
-        return new DonasiResource($data->loadMissing('user'));
+        return new DonasiResource($data->loadMissing('user','panti'));
     }
 
     /**
