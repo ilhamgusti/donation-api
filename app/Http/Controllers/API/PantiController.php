@@ -71,9 +71,13 @@ class PantiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $data = Panti::findOrFail($id);
+    public function show(Request $request, $id)
+    { 
+        if($id === 'details') {
+            $data = Panti::findOrFail($request->$id);
+        }else{
+            $data = Panti::findOrFail($id);
+        }
         return new PantiResource($data->loadMissing('kegiatan'));
     }
 
