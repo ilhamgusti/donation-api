@@ -77,12 +77,12 @@ class PantiController extends Controller
         if($id === 'details') {
             $data = Panti::findOrFail($request->$id);
             if($request->query('eventDate')){
-                return Kegiatan::where('hari_acara',$request->query('eventDate'))->where('panti_id',$request->id)->get();
+                return Kegiatan::whereDate('hari_acara',$request->query('eventDate'))->where('panti_id',$request->id)->get();
             }
         }else{
             $data = Panti::findOrFail($id);
             if($request->query('eventDate')){
-                return Kegiatan::where('hari_acara',$request->query('eventDate'))->where('panti_id',$id)->get();
+                return Kegiatan::whereDate('hari_acara',$request->query('eventDate'))->where('panti_id',$id)->get();
             }
         }
         return new PantiResource($data->loadMissing('kegiatan'));
