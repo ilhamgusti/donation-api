@@ -24,6 +24,13 @@ class Panti extends Model
         'ktp'
     ];
 
+    protected function getFilters()
+    {
+        return [
+            'App\QueryFilters\ByLikeOrLike:nama_panti,alamat,q',
+        ];
+    }
+
     //1 panti hanya diurus oleh 1 user account dengan tipe 1
     public function user()
     {
