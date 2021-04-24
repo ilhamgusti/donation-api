@@ -27,7 +27,7 @@ class Panti extends Model
     protected function getFilters()
     {
         return [
-            'App\QueryFilters\ByLikeOrLike:nama_panti,alamat,q',
+            'App\QueryFilters\ByLikeOrLike:nama_panti,alamat,search',
         ];
     }
 
