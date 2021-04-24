@@ -40,5 +40,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('approval',[ApprovalController::class,'index'])->name('approval.index');
     Route::match(['PUT','PATCH'],'approval/:id',[ApprovalController::class,'update'])->name('approval.update');
 
-    Route::match(['PUT','PATCH'],'me',[ChangeUserController::class])->name('user.update');
+    Route::match(['PUT','PATCH'],'me',ChangeUserController::class)->name('user.update');
 });
