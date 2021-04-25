@@ -1,6 +1,7 @@
 <?php
 
 namespace App\QueryFilters;
+
 use Closure;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class ByLikeOrLike
     public function handle($request, Closure $next, ...$args)
     {
 
-        if( ! $this->request->has($args[1])){
+        if (!$this->request->has($args[1]) && !$this->request->has($args[2])) {
             return $next($request);
         }
 
@@ -36,6 +37,6 @@ class ByLikeOrLike
 
     protected function applyFilters($builder, $args)
     {
-        return $builder->where($args[0],'LIKE','%'.request($args[2]).'%')->orWhere($args[1],'LIKE','%'.request($args[2]).'%');
+        return $builder->where($args[0], 'LIKE', '%' . request($args[2]) . '%')->orWhere($args[1], 'LIKE', '%' . request($args[2]) . '%');
     }
 }
