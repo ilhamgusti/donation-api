@@ -18,6 +18,7 @@ class Donasi extends Model
         'jumlah_barang',
         'tanggal_kirim',
         'kirim_lewat',
+        'panti_id',
     ];
 
     protected function getFilters()
