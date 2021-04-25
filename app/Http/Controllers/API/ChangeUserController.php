@@ -16,7 +16,7 @@ class ChangeUserController extends Controller
     {
         DB::beginTransaction();
         try {
-            $user = UserTransformer::toInstance($request->validated(), $request->user);
+            $user = UserTransformer::toInstance($request->validated(), $request->user());
             $user->save();
             DB::commit();
         } catch (Exception $ex) {
