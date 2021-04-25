@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class ChangeUserController extends Controller
 {
-    public function __invoke(Request $request)
+    public function index(Request $request)
     {
         DB::beginTransaction();
         try {
