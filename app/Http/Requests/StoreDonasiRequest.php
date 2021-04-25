@@ -30,6 +30,7 @@ class StoreDonasiRequest extends FormRequest
             'jumlah_barang'=> 'required|integer',
             'tanggal_kirim'=> 'required|date',
             'kirim_lewat'=> 'required|string',
+            'panti_id'=> 'required',
         ];
     }
 }
