@@ -30,6 +30,9 @@ class KegiatanTransformer
                 case "pending":
                     $kegiatan["pending"] = $value;
                     break;
+                case "panti_id":
+                    $kegiatan["panti_id"] = $value;
+                    break;
             }
         }
 
