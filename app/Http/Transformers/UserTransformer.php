@@ -16,19 +16,19 @@ class UserTransformer
 
         foreach ($input as $key => $value) {
             switch ($key) {
-                case 'nama':
-                    $user['nama'] = $value;
-                case 'email':
-                    $user['email'] = $value;
-                case 'no_tel':
-                    $user['no_tel'] = $value;
-                case 'alamat':
-                    $user['alamat'] = $value;
-                case 'tipe':
-                    $user['tipe'] = $value;
-                case 'password':
+                case "nama":
+                    $user->nama = $value;
+                case "email":
+                    $user->email = $value;
+                case "no_tel":
+                    $user->no_tel = $value;
+                case "alamat":
+                    $user->alamat = $value;
+                case "tipe":
+                    $user->tipe = $value;
+                case "password":
                     $passwordValue = Hash::make($value);
-                    $user['password'] = $passwordValue;
+                    $user->password = $passwordValue;
             }
         }
 

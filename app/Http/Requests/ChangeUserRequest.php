@@ -24,12 +24,11 @@ class ChangeUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'sometimes|required|string',
-            'nama'=>'sometimes|required|string',
-            'alamat'=>'sometimes|required|string',
-            'no_tel'=>'sometimes|required',
-            'online'=>'sometimes|required',
-            'password'=>'sometimes|required',
+            'nama' => 'sometimes|required|string',
+            'email' => 'sometimes|required|string|email',
+            'alamat' => 'sometimes|required|string',
+            'no_tel' => 'sometimes|required',
+            'password' => 'sometimes|required',
         ];
     }
 }
