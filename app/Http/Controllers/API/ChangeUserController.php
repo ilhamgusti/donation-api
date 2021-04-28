@@ -27,11 +27,11 @@ class ChangeUserController extends Controller
         }
 
         return (new UserResource($user))
-        ->additional([
-            'meta' => [
-                'success' => true,
-                'message' => "Panti updated"
-  ]
-        ]);
+            ->additional([
+                'meta' => [
+                    'success' => true,
+                    'message' => "User Updated"
+                ]
+            ]);
     }
 }
