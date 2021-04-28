@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Filter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\QueryFilters\Pending;
 
 class Donasi extends Model
 {
@@ -26,6 +27,7 @@ class Donasi extends Model
         return [
             'App\QueryFilters\ByDate:tanggal_kirim,startDate,endDate',
             'App\QueryFilters\ByMonthAndYear:tanggal_kirim,month,year',
+            Pending::class,
         ];
     }
     //setiap donasi dimiliki 1 user
