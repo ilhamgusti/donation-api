@@ -18,17 +18,23 @@ class UserTransformer
             switch ($key) {
                 case "nama":
                     $user->nama = $value;
+                    break;
                 case "email":
                     $user->email = $value;
+                    break;
                 case "no_tel":
                     $user->no_tel = $value;
+                    break;
                 case "alamat":
                     $user->alamat = $value;
+                    break;
                 case "tipe":
                     $user->tipe = $value;
+                    break;
                 case "password":
                     $passwordValue = Hash::make($value);
                     $user->password = $passwordValue;
+                    break;
             }
         }
 
