@@ -53,6 +53,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Donasi::class, 'user_id');
     }
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class, 'user_id');
+    }
 
     // 1 panti dimiliki 1 user account dengan tipe 1
     public function panti()
