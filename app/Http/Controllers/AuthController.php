@@ -60,7 +60,9 @@ class AuthController extends Controller
     }
     public function me(Request $request)
     {
-        return (new UserResource($request->user()->loadMissing('kegiatan')));
+        if($request->query('kegiatan') === '1')return (new UserResource($request->user()->loadMissing('kegiatan')));
+        if($request->query('donasi') === '1') return (new UserResource($request->user()->loadMissing('donasi')));
+        return (new UserResource($request->user()));
     }
 
     public function logout(Request $request)
