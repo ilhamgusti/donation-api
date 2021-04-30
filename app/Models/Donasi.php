@@ -26,7 +26,7 @@ class Donasi extends Model
     {
         return [
             'App\QueryFilters\ByDate:tanggal_kirim,startDate,endDate',
-            'App\QueryFilters\ByMonthAndYear:tanggal_kirim,month,year',
+            'App\QueryFilters\ByMonthAndYear:tanggal_kirim,tahun,bulan',
             Pending::class,
         ];
     }

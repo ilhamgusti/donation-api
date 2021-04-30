@@ -18,7 +18,7 @@ class Kegiatan extends Model
     {
         return [
             'App\QueryFilters\ByDate:hari_acara,startDate,endDate',
-            'App\QueryFilters\ByMonthAndYear:hari_acara,month,year',
+            'App\QueryFilters\ByMonthAndYear:hari_acara,tahun,bulan',
             Pending::class,
         ];
     }
