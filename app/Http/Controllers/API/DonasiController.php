@@ -22,7 +22,7 @@ class DonasiController extends Controller
     public function index(Request $request)
     {
         $data = Donasi::filter()->paginate($request->has('pageSize') ? $request->pageSize:10);
-        return DonasiResource::collection($data);
+        return DonasiResource::collection($data->loadMissing(['panti','kegiatan']));
     }
 
     /**

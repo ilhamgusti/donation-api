@@ -23,7 +23,7 @@ class KegiatanController extends Controller
     public function index(Request $request)
     {
         $data = Kegiatan::filter()->paginate($request->has('pageSize') ? $request->pageSize : 10);
-        return KegiatanResource::collection($data);
+        return KegiatanResource::collection($data->loadMissing(['donasi','panti']));
     }
 
     /**
