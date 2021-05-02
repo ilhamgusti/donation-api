@@ -12,6 +12,7 @@ class Kegiatan extends Model
 {
     use HasFactory, Filter;
     protected $table = 'kegiatan';
+    protected $with = ['panti'];
 
 
     protected function getFilters()

@@ -11,6 +11,7 @@ class Donasi extends Model
 {
     use HasFactory, Filter;
     protected $table = 'donasi';
+    protected $with = ['panti'];
 
     protected $fillable = [
         'jenis_donasi',
