@@ -45,29 +45,29 @@ class ApprovalController extends Controller
      */
     public function update(UpdateApprovalRequest $request, $id)
     {
-        if ($request->user()->tipe !== 2 || $request->user()->tipe !== 'Admin') {
+        if ($request->user()->tipe === 2 || $request->user()->tipe === 'Admin') {
+            DB::beginTransaction();
+            try {
+                $panti = PantiTransformer::toInstance($request->validated(), Panti::where('id', $id)->firstOrFail());
+                $panti->save();
+                DB::commit();
+            } catch (Exception $ex) {
+                Log::info($ex->getMessage());
+                DB::rollBack();
+                return response()->json($ex->getMessage(), 409);
+            }
+
+            return (new PantiResource($panti))
+                ->additional([
+                    'meta' => [
+                        'success' => true,
+                        'message' => "Panti verified"
+                    ]
+                ]);
+        } else {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk verifikasi panti'
             ], 403);
         }
-
-        DB::beginTransaction();
-        try {
-            $panti = PantiTransformer::toInstance($request->validated(), Panti::where('id', $id)->firstOrFail());
-            $panti->save();
-            DB::commit();
-        } catch (Exception $ex) {
-            Log::info($ex->getMessage());
-            DB::rollBack();
-            return response()->json($ex->getMessage(), 409);
-        }
-
-        return (new PantiResource($panti))
-            ->additional([
-                'meta' => [
-                    'success' => true,
-                    'message' => "Panti verified"
-                ]
-            ]);
     }
 }
