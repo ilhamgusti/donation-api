@@ -21,6 +21,7 @@ class ApprovalController extends Controller
      */
     public function index(Request $request)
     {
+        return $request->user()->tipe;
         if ($request->user->tipe !== 2 || $request->user->tipe !== 'Admin') {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk melihat list panti yang belum di verifikasi'
