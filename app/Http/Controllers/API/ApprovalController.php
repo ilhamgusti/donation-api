@@ -45,7 +45,7 @@ class ApprovalController extends Controller
      */
     public function update(UpdateApprovalRequest $request, $id)
     {
-        if ($request->user()->tipe === 2 || $request->user()->tipe === 'Admin') {
+        if ($request->user()->tipe === 'Admin') {
             DB::beginTransaction();
             try {
                 $panti = PantiTransformer::toInstance($request->validated(), Panti::where('id', $id)->firstOrFail());
