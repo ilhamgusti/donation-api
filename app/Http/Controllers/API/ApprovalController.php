@@ -45,7 +45,6 @@ class ApprovalController extends Controller
      */
     public function update(UpdateApprovalRequest $request, $id)
     {
-        return $request->validated();
         if ($request->user()->tipe === 'Admin') {
             DB::beginTransaction();
             try {
