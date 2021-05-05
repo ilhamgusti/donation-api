@@ -63,9 +63,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(Panti::class, 'user_id');
     }
-
-    public function kegiatan()
-    {
-        return $this->hasMany(Kegiatan::class, 'id');
-    }
 }
