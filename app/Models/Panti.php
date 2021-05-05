@@ -33,6 +33,8 @@ class Panti extends Model
     protected $casts = [
         'isVerified_ktp' => 'boolean',
         'isVerified_sertifikat' => 'boolean',
+        'jumlah_anak' => 'integer',
+        'jumlah_pengurus' => 'integer',
     ];
 
     protected function getFilters()
