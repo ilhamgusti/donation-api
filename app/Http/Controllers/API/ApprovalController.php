@@ -45,7 +45,6 @@ class ApprovalController extends Controller
      */
     public function update(UpdateApprovalRequest $request, $id)
     {
-        return $id;
         if ($request->user()->tipe !== 2 || $request->user()->tipe !== 'Admin') {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk verifikasi panti'
