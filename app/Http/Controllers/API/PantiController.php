@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePantiRequest;
 use App\Http\Requests\UpdatePantiRequest;
 use App\Http\Resources\DonasiResource;
+use App\Http\Resources\KegiatanResource;
 use App\Http\Resources\PantiResource;
 use App\Http\Transformers\PantiTransformer;
 use App\Models\Donasi;
@@ -27,6 +28,7 @@ class PantiController extends Controller
      */
     public function index(Request $request)
     {
+
         if ($request->has('pageSize')) {
             $data = Panti::filter()->paginate($request->has('pageSize'));
         } else {
@@ -73,16 +75,33 @@ class PantiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $id)
-    { 
-        if($id === 'details') {
-            $data = Panti::findOrFail($request->$id);
-            if($request->query('eventDate')){
-                return Kegiatan::whereDate('hari_acara',$request->query('eventDate'))->where('panti_id',$request->id)->get();
+    {
+
+        if ($id === 'details') {
+            if ($request->has('kegiatan')) {
+                $data = Kegiatan::where('pending', $request->query('kegiatan'))->where('panti_id', $request->$id)->get();
+                return new KegiatanResource($data);
+            } else if ($request->has('donasi')) {
+                $data = Donasi::where('pending', $request->query('donasi'))->where('panti_id', $request->$id)->get();
+                return new DonasiResource($data);
+            } else {
+                $data = Panti::findOrFail($request->$id);
+                if ($request->query('eventDate')) {
+                    return Kegiatan::whereDate('hari_acara', $request->query('eventDate'))->where('panti_id', $request->id)->get();
+                }
             }
-        }else{
-            $data = Panti::findOrFail($id);
-            if($request->query('eventDate')){
-                return Kegiatan::whereDate('hari_acara',$request->query('eventDate'))->where('panti_id',$id)->get();
+        } else {
+            if ($request->has('kegiatan')) {
+                $data = Kegiatan::where('pending', $request->query('kegiatan'))->where('panti_id', $id)->get();
+                return new KegiatanResource($data);
+            } else if ($request->has('donasi')) {
+                $data = Donasi::where('pending', $request->query('donasi'))->where('panti_id', $id)->get();
+                return new DonasiResource($data);
+            } else {
+                $data = Panti::findOrFail($id);
+                if ($request->query('eventDate')) {
+                    return Kegiatan::whereDate('hari_acara', $request->query('eventDate'))->where('panti_id', $id)->get();
+                }
             }
         }
         return new PantiResource($data->loadMissing('kegiatan'));
