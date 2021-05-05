@@ -35,7 +35,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'email_verified_at',
-        'api_token', 
+        'api_token',
         'tokens'
     ];
 
@@ -58,5 +58,10 @@ class User extends Authenticatable
     public function panti()
     {
         return $this->hasOne(Panti::class, 'user_id');
+    }
+
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class, 'id');
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\QueryFilters\ByDate;
 use App\QueryFilters\Pending;
+use App\User;
 
 class Kegiatan extends Model
 {
@@ -27,5 +28,9 @@ class Kegiatan extends Model
     public function panti()
     {
         return $this->belongsTo(Panti::class, 'panti_id', 'id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
