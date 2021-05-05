@@ -21,19 +21,19 @@ class ApprovalController extends Controller
      */
     public function index(Request $request)
     {
-        return $request->user()->tipe;
-        if ($request->user->tipe !== 2 || $request->user->tipe !== 'Admin') {
+        if ($request->user()->tipe === 2 || $request->user()->tipe === 'Admin') {
+            if ($request->has('pageSize')) {
+                $data = Panti::where('isVerified_ktp', 0)->orWhere('isVerified_sertifikat', 0)->paginate($request->has('pageSize'));
+            } else {
+                $data = Panti::where('isVerified_ktp', 0)->orWhere('isVerified_sertifikat', 0)->get();
+            }
+
+            return PantiResource::collection($data);
+        } else {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk melihat list panti yang belum di verifikasi'
             ], 403);
         }
-        if ($request->has('pageSize')) {
-            $data = Panti::where('isVerified_ktp', 0)->orWhere('isVerified_sertifikat', 0)->paginate($request->has('pageSize'));
-        } else {
-            $data = Panti::where('isVerified_ktp', 0)->orWhere('isVerified_sertifikat', 0)->get();
-        }
-
-        return PantiResource::collection($data);
     }
 
     /**
