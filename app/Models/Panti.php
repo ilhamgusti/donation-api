@@ -25,6 +25,16 @@ class Panti extends Model
         'ktp'
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'isVerified_ktp' => 'boolean',
+        'isVerified_sertifikat' => 'boolean',
+    ];
+
     protected function getFilters()
     {
         return [
