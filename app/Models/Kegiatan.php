@@ -13,13 +13,14 @@ class Kegiatan extends Model
 {
     use HasFactory, Filter;
     protected $table = 'kegiatan';
+    protected $with = ['panti'];
 
 
     protected function getFilters()
     {
         return [
             'App\QueryFilters\ByDate:hari_acara,startDate,endDate',
-            'App\QueryFilters\ByMonthAndYear:hari_acara,month,year',
+            'App\QueryFilters\ByMonthAndYear:hari_acara,tahun,bulan',
             Pending::class,
         ];
     }

@@ -29,6 +29,7 @@ class StoreKegiatanRequest extends FormRequest
             'acara'=>'required',
             'sesi_makan'=>'required|string',
             'pending'=>'required|integer',
+            'panti_id'=>'required|integer',
         ];
     }
 }

@@ -22,7 +22,7 @@ class DonasiController extends Controller
     public function index(Request $request)
     {
         $data = Donasi::filter()->paginate($request->has('pageSize') ? $request->pageSize:10);
-        return DonasiResource::collection($data);
+        return DonasiResource::collection($data->loadMissing(['panti','user']));
     }
 
     /**
@@ -33,6 +33,11 @@ class DonasiController extends Controller
      */
     public function store(StoreDonasiRequest $request)
     {
+        if ($request->user()->tipe !== 0 || $request->user()->tipe !== 'Donatur') {
+            return response()->json([
+                'message' => 'Kamu tidak dapat akses untuk menambah donasi'
+            ], 403);
+        }
         DB::beginTransaction();
         try {
             $donasi = DonasiTransformer::toInstance($request->validated());

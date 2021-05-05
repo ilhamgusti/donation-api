@@ -23,7 +23,7 @@ class KegiatanController extends Controller
     public function index(Request $request)
     {
         $data = Kegiatan::filter()->paginate($request->has('pageSize') ? $request->pageSize : 10);
-        return KegiatanResource::collection($data);
+        return KegiatanResource::collection($data->loadMissing(['user','panti']));
     }
 
     /**
@@ -34,6 +34,11 @@ class KegiatanController extends Controller
      */
     public function store(StoreKegiatanRequest $request)
     {
+        if ($request->user()->tipe !== 0 || $request->user()->tipe !== 'Donatur') {
+            return response()->json([
+                'message' => 'Kamu tidak dapat akses untuk menambah kegiatan'
+            ], 403);
+        }
         DB::beginTransaction();
         try {
             $kegiatan = KegiatanTransformer::toInstance($request->validated());
