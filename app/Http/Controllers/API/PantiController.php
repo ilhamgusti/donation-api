@@ -79,10 +79,10 @@ class PantiController extends Controller
 
         if ($id === 'details') {
             if ($request->has('kegiatan')) {
-                $data = Kegiatan::where('pending', $request->query('kegiatan'))->where('panti_id', $request->$id)->get();
+                $data = Kegiatan::with('user')->where('pending', $request->query('kegiatan'))->where('panti_id', $request->$id)->get();
                 return new KegiatanResource($data);
             } else if ($request->has('donasi')) {
-                $data = Donasi::where('pending', $request->query('donasi'))->where('panti_id', $request->$id)->get();
+                $data = Donasi::with('user')->where('pending', $request->query('donasi'))->where('panti_id', $request->$id)->get();
                 return new DonasiResource($data);
             } else {
                 $data = Panti::findOrFail($request->$id);
@@ -92,10 +92,10 @@ class PantiController extends Controller
             }
         } else {
             if ($request->has('kegiatan')) {
-                $data = Kegiatan::where('pending', $request->query('kegiatan'))->where('panti_id', $id)->get();
+                $data = Kegiatan::with('user')->where('pending', $request->query('kegiatan'))->where('panti_id', $id)->get();
                 return new KegiatanResource($data);
             } else if ($request->has('donasi')) {
-                $data = Donasi::where('pending', $request->query('donasi'))->where('panti_id', $id)->get();
+                $data = Donasi::with('user')->where('pending', $request->query('donasi'))->where('panti_id', $id)->get();
                 return new DonasiResource($data);
             } else {
                 $data = Panti::findOrFail($id);
