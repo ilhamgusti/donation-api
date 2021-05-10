@@ -33,6 +33,9 @@ class DonasiTransformer
                 case 'kirim_lewat':
                     $donasi['kirim_lewat'] = $value;
                     break;
+                case 'pending':
+                    $donasi['pending'] = $value;
+                    break;
                 case 'panti_id':
                     $donasi['panti_id'] = $value;
                     break;
