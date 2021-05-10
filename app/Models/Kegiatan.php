@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\QueryFilters\ByDate;
 use App\QueryFilters\Pending;
-use App\User;
+use App\Models\User;
 
 class Kegiatan extends Model
 {
