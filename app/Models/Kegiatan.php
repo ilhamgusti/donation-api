@@ -15,6 +15,11 @@ class Kegiatan extends Model
     protected $table = 'kegiatan';
     protected $with = ['panti'];
 
+    protected $fillable = [
+        'panti_id',
+        'pending'
+    ];
+
 
     protected function getFilters()
     {
