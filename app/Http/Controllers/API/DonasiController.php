@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDonasiRequest;
+use App\Http\Requests\UpdateDonasiRequest;
 use App\Http\Resources\DonasiResource;
 use App\Http\Transformers\DonasiTransformer;
 use App\Models\Donasi;
@@ -21,8 +22,8 @@ class DonasiController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Donasi::filter()->paginate($request->has('pageSize') ? $request->pageSize:10);
-        return DonasiResource::collection($data->loadMissing(['panti','user']));
+        $data = Donasi::filter()->paginate($request->has('pageSize') ? $request->pageSize : 10);
+        return DonasiResource::collection($data->loadMissing(['panti', 'user']));
     }
 
     /**
@@ -63,14 +64,14 @@ class DonasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function show(Request $request, $id)
     {
-        if($id === 'details') {
+        if ($id === 'details') {
             $data = Donasi::findOrFail($request->$id);
-        }else{
+        } else {
             $data = Donasi::findOrFail($id);
         }
-        return new DonasiResource($data->loadMissing('user','panti'));
+        return new DonasiResource($data->loadMissing('user', 'panti'));
     }
 
     /**
@@ -80,9 +81,25 @@ class DonasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDonasiRequest $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $donasi = DonasiTransformer::toInstance($request->validated(), Donasi::findOrFail($id));
+            $donasi->save();
+            DB::commit();
+        } catch (Exception $ex) {
+            Log::info($ex->getMessage());
+            DB::rollBack();
+            return response()->json($ex->getMessage(), 409);
+        }
+        return (new DonasiResource($donasi))
+            ->additional([
+                'meta' => [
+                    'success' => true,
+                    'message' => "Donasi updated"
+                ]
+            ]);
     }
 
     /**

@@ -24,12 +24,14 @@ class UpdateDonasiRequest extends FormRequest
     public function rules()
     {
         return [
-            'jenis_donasi'=> 'required|string',
-            'jumlah_rp'=> 'required|integer',
-            'nama_barang'=> 'required|string',
-            'jumlah_barang'=> 'required|integer',
-            'tanggal_kirim'=> 'required|date',
-            'kirim_lewat'=> 'required|string',
+            'jenis_donasi' => 'sometimes|required|string',
+            'jumlah_rp' => 'sometimes|required|integer',
+            'nama_barang' => 'sometimes|required|string',
+            'jumlah_barang' => 'sometimes|required|integer',
+            'tanggal_kirim' => 'sometimes|required|date',
+            'kirim_lewat' => 'sometimes|required|string',
+            'panti_id' => 'sometimes|required',
+            'pending' => 'sometimes|required|boolean'
         ];
     }
 }
