@@ -15,31 +15,31 @@ class PantiTransformer
 
         foreach ($input as $key => $value) {
             switch ($key) {
-                case'nama_panti':
+                case 'nama_panti':
                     $panti->nama_panti = $value;
                     break;
-                case'alamat':
+                case 'alamat':
                     $panti->alamat = $value;
                     break;
-                case'noTel_panti':
+                case 'noTel_panti':
                     $panti->noTel_panti = $value;
                     break;
-                case'emailPanti':
+                case 'emailPanti':
                     $panti->emailPanti = $value;
                     break;
-                case'jumlah_anak':
+                case 'jumlah_anak':
                     $panti->jumlah_anak = $value;
                     break;
-                case'jumlah_pengurus':
+                case 'jumlah_pengurus':
                     $panti->jumlah_pengurus = $value;
                     break;
-                case'kebutuhan_panti':
+                case 'kebutuhan_panti':
                     $panti->kebutuhan_panti = $value;
                     break;
-                case'sertifikat':
+                case 'sertifikat':
                     $panti->sertifikat = $value;
                     break;
-                case'ktp':
+                case 'ktp':
                     $panti->ktp = $value;
                     break;
                 case'lat':
@@ -47,6 +47,12 @@ class PantiTransformer
                     break;
                 case'lon':
                     $panti->lon = $value;
+                    break;
+                case 'isVerified_ktp':
+                    $panti->isVerified_ktp = $value;
+                    break;
+                case 'isVerified_sertifikat':
+                    $panti->isVerified_sertifikat = $value;
                     break;
             }
         }

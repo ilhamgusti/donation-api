@@ -7,12 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\QueryFilters\ByDate;
 use App\QueryFilters\Pending;
+use App\Models\User;
 
 class Kegiatan extends Model
 {
     use HasFactory, Filter;
     protected $table = 'kegiatan';
     protected $with = ['panti', 'user'];
+
+    protected $fillable = [
+        'panti_id',
+        'pending'
+    ];
 
 
     protected function getFilters()

@@ -21,6 +21,7 @@ class Donasi extends Model
         'tanggal_kirim',
         'kirim_lewat',
         'panti_id',
+        'pending'
     ];
 
     protected function getFilters()

@@ -35,7 +35,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'email_verified_at',
-        'api_token', 
+        'api_token',
         'tokens'
     ];
 

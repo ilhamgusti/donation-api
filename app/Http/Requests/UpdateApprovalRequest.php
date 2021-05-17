@@ -13,7 +13,7 @@ class UpdateApprovalRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,8 @@ class UpdateApprovalRequest extends FormRequest
     public function rules()
     {
         return [
-            'isVerified_ktp'=>'sometimes|required|boolean',
-            'isVerified_sertifikat'=>'sometimes|required|boolean'
+            'isVerified_ktp' => 'sometimes|required|boolean',
+            'isVerified_sertifikat' => 'sometimes|required|boolean'
         ];
     }
 }

@@ -32,13 +32,12 @@ Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum')->na
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::apiResource('panti', PantiController::class,['except'=>'update']);
-    Route::match(['PUT','PATCH'],'panti',[PantiController::class,'update'])->name('panti.update');
-    Route::apiResource('donasi', DonasiController::class,['except'=>'update']);
-    Route::match(['PUT','PATCH'],'donasi',[DonasiController::class,'update'])->name('donasi.update');
+    Route::apiResource('panti', PantiController::class, ['except' => 'update']);
+    Route::match(['PUT', 'PATCH'], 'panti', [PantiController::class, 'update'])->name('panti.update');
+    Route::apiResource('donasi', DonasiController::class);
     Route::apiResource('kegiatan', KegiatanController::class);
-    Route::get('approval',[ApprovalController::class,'index'])->name('approval.index');
-    Route::match(['PUT','PATCH'],'approval/:id',[ApprovalController::class,'update'])->name('approval.update');
+    Route::get('approval', [ApprovalController::class, 'index'])->name('approval.index');
+    Route::match(['PUT', 'PATCH'], 'approval/{id}', [ApprovalController::class, 'update'])->name('approval.update');
 
-    Route::match(['PUT','PATCH'],'me',[ChangeUserController::class,'index'])->name('user.update');
+    Route::match(['PUT', 'PATCH'], 'me', [ChangeUserController::class, 'index'])->name('user.update');
 });
