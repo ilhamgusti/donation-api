@@ -26,6 +26,8 @@ class CreatePantisTable extends Migration
             $table->boolean('isVerified_ktp')->default(false);
             $table->boolean('isVerified_sertifikat')->default(false);
             $table->string('ktp');
+            $table->string('lat')->nullable();
+            $table->string('lon')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
 
