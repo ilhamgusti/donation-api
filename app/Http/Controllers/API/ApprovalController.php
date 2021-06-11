@@ -21,7 +21,7 @@ class ApprovalController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->user()->tipe === 2 || $request->user()->tipe === 'Admin') {
+        if ($request->user()->tipe === 'Admin') {
             if ($request->has('pageSize')) {
                 $data = Panti::where('isVerified_ktp', 0)->orWhere('isVerified_sertifikat', 0)->paginate($request->has('pageSize'));
             } else {

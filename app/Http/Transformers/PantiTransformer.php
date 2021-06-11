@@ -42,6 +42,12 @@ class PantiTransformer
                 case 'ktp':
                     $panti->ktp = $value;
                     break;
+                case'lat':
+                    $panti->lat = $value;
+                    break;
+                case'lon':
+                    $panti->lon = $value;
+                    break;
                 case 'isVerified_ktp':
                     $panti->isVerified_ktp = $value;
                     break;

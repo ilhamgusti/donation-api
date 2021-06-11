@@ -116,7 +116,7 @@ class PantiController extends Controller
      */
     public function update(UpdatePantiRequest $request)
     {
-        if ($request->user()->tipe === 0 || $request->user()->tipe === 'Donatur') {
+        if ($request->user()->tipe === 'Donatur') {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk mengubah panti'
             ], 403);
@@ -150,7 +150,7 @@ class PantiController extends Controller
      */
     public function destroy(Request $request)
     {
-        if ($request->user()->tipe === 0 || $request->user()->tipe === 'Donatur') {
+        if ($request->user()->tipe === 'Donatur') {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk menghapus panti'
             ], 403);

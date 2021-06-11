@@ -34,7 +34,7 @@ class DonasiController extends Controller
      */
     public function store(StoreDonasiRequest $request)
     {
-        if ($request->user()->tipe !== 0 || $request->user()->tipe !== 'Donatur') {
+        if ($request->user()->tipe !== 'Donatur') {
             return response()->json([
                 'message' => 'Kamu tidak dapat akses untuk menambah donasi'
             ], 403);

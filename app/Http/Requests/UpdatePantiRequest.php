@@ -25,6 +25,8 @@ class UpdatePantiRequest extends FormRequest
     {
         return [
             'nama_panti'=>'sometimes|required|string',
+            'lat'=>'sometimes|required|string',
+            'lon'=>'sometimes|required|string',
             'alamat'=>'sometimes|required|string',
             'noTel_panti'=>'sometimes|required',
             'emailPanti'=>'sometimes|required|email|string',

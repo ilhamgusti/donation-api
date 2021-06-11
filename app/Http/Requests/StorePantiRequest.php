@@ -25,6 +25,8 @@ class StorePantiRequest extends FormRequest
     {
         return [
             'nama_panti'=>'required|string',
+            'lat'=>'required|string',
+            'lon'=>'required|string',
             'alamat'=>'required|string',
             'noTel_panti'=>'required',
             'emailPanti'=>'required|email|string',
