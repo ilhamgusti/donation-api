@@ -27,7 +27,7 @@ class UpdateApprovalRequest extends FormRequest
             'isVerified_ktp' => 'sometimes|required|boolean',
             'isVerified_sertifikat' => 'sometimes|required|boolean',
             'status' => 'sometimes|integer',
-            'keterangan'=> 'sometimes|integer'
+            'keterangan'=> 'sometimes|string'
         ];
     }
 }
