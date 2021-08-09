@@ -25,7 +25,8 @@ class UpdateApprovalRequest extends FormRequest
     {
         return [
             'isVerified_ktp' => 'sometimes|required|boolean',
-            'isVerified_sertifikat' => 'sometimes|required|boolean'
+            'isVerified_sertifikat' => 'sometimes|required|boolean',
+            'status' => 'sometimes|integer',
         ];
     }
 }

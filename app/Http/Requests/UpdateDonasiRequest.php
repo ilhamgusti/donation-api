@@ -32,7 +32,7 @@ class UpdateDonasiRequest extends FormRequest
             'kirim_lewat' => 'sometimes|required|string',
             'panti_id' => 'sometimes|required',
             'pending' => 'sometimes|required|integer',
-             'keterangan' => 'sometimes|string'
+            'keterangan' => 'sometimes|string'
         ];
     }
 }
