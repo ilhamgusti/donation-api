@@ -25,7 +25,8 @@ class Panti extends Model
         'ktp',
         'lat',
         'lon',
-        'keterangan'
+        'keterangan',
+        'status'
     ];
 
     /**

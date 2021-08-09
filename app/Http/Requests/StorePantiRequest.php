@@ -36,6 +36,7 @@ class StorePantiRequest extends FormRequest
             'sertifikat'=>'required|file|mimes:png,jpg,jpeg',
             'ktp'=>'required|file|mimes:png,jpg,jpeg',
             'keterangan'=>'required|string',
+            'status'=>'sometimes|integer',
         ];
     }
 }

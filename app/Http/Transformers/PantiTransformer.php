@@ -57,6 +57,9 @@ class PantiTransformer
                 case 'keterangan':
                     $panti->keterangan = $value;
                     break;
+                case 'status':
+                    $panti->status = $value;
+                    break;
             }
         }
 
