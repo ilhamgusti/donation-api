@@ -24,7 +24,8 @@ class Panti extends Model
         'isVerified_sertifikat',
         'ktp',
         'lat',
-        'lon'
+        'lon',
+        'keterangan'
     ];
 
     /**

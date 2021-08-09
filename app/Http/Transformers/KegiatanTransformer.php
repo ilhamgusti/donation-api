@@ -33,6 +33,9 @@ class KegiatanTransformer
                 case "panti_id":
                     $kegiatan["panti_id"] = $value;
                     break;
+                case "keterangan":
+                    $kegiatan["keterangan"] = $value;
+                    break;
             }
         }
 

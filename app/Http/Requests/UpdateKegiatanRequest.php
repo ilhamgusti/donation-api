@@ -29,6 +29,7 @@ class UpdateKegiatanRequest extends FormRequest
             'acara'=>'sometimes|required',
             'sesi_makan'=>'sometimes|required|string',
             'pending'=>'sometimes|required|integer',
+             'keterangan' => 'sometimes|string',
         ];
     }
 }

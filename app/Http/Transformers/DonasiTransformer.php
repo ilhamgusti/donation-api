@@ -39,6 +39,9 @@ class DonasiTransformer
                 case 'panti_id':
                     $donasi['panti_id'] = $value;
                     break;
+                case "keterangan":
+                    $kegiatan["keterangan"] = $value;
+                    break;
             }
         }
 

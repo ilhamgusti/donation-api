@@ -30,6 +30,7 @@ class StoreKegiatanRequest extends FormRequest
             'sesi_makan'=>'required|string',
             'pending'=>'required|integer',
             'panti_id'=>'required|integer',
+            'keterangan' => 'sometimes|string'
         ];
     }
 }

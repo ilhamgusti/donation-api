@@ -35,6 +35,7 @@ class UpdatePantiRequest extends FormRequest
             'kebutuhan_panti'=>'sometimes|required|string',
             'sertifikat'=>'sometimes|required|file|mimes:png,jpg,jpeg',
             'ktp'=>'sometimes|required|file|mimes:png,jpg,jpeg',
+            'keterangan' => 'sometimes|string',
         ];
     }
 }

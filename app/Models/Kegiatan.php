@@ -17,7 +17,8 @@ class Kegiatan extends Model
 
     protected $fillable = [
         'panti_id',
-        'pending'
+        'pending',
+        'keterangan'
     ];
 
 

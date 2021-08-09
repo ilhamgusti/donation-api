@@ -54,6 +54,9 @@ class PantiTransformer
                 case 'isVerified_sertifikat':
                     $panti->isVerified_sertifikat = $value;
                     break;
+                case 'keterangan':
+                    $panti->keterangan = $value;
+                    break;
             }
         }
 

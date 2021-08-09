@@ -31,6 +31,7 @@ class StoreDonasiRequest extends FormRequest
             'tanggal_kirim'=> 'required|date',
             'kirim_lewat'=> 'required|string',
             'panti_id'=> 'required',
+            'keterangan' => 'sometimes|string',
         ];
     }
 }
